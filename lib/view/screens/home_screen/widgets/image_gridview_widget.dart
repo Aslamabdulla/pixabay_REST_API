@@ -67,16 +67,23 @@ class ImageGridviewWidget extends StatelessWidget {
                       crossAxisCount: 2),
               crossAxisSpacing: 8,
               mainAxisSpacing: 8,
-              itemCount: homeCtrl.pixabayImages.length,
+              itemCount: homeCtrl.pixabayImages.length + 1,
               itemBuilder: (context, index) {
-                return ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: Image.network(
-                    homeCtrl.pixabayImages[index].previewURL,
-                    filterQuality: FilterQuality.low,
-                    fit: BoxFit.cover,
-                  ),
-                );
+                if (index < homeCtrl.pixabayImages.length) {
+                  final imagesNetwork =
+                      homeCtrl.pixabayImages[index].previewURL;
+
+                  return ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: Image.network(
+                      imagesNetwork,
+                      filterQuality: FilterQuality.low,
+                      fit: BoxFit.cover,
+                    ),
+                  );
+                } else {
+                  return const SizedBox();
+                }
               },
             )
           : const Center(
