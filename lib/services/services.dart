@@ -11,20 +11,32 @@ abstract class ApiCalls {
 }
 
 class ImageDatabase extends ApiCalls {
+  List<ImagesPixabay> pixabayImages = [];
+  Url url = Url();
   @override
-  Future<void> getImage(String text) async {
-    Url url = Url();
-    final Response response = await Dio().get(
-      '${url.kBaseUrl}${url.getImage}$text&image_type=photo&pretty=true&per_page=100',
-    );
-    // hits = response.data['hits'];
-    final List hits = response.data['hits'];
-    List<ImagesPixabay> pixabayImages = [];
-    pixabayImages = hits.map(
-      (e) {
-        return ImagesPixabay.fromMap(e);
-      },
-    ).toList();
-    homeController.getImage(pixabayImages);
+  Future<void> getImage(String value) async {
+    try {
+      final Response response = await Dio().get(
+        '${url.kBaseUrl}${url.getImage}$value&image_type=photo&pretty=true&per_page=100',
+      );
+      if (response.statusCode == 200) {
+        final List hits = response.data['hits'];
+
+        pixabayImages = hits.map(
+          (e) {
+            return ImagesPixabay.fromMap(e);
+          },
+        ).toList();
+        homeController.isLoading.value = false;
+        homeController.getImage(pixabayImages);
+      } else if (response.statusCode == 404) {
+        homeController.isLoading.value = true;
+        print("Error page not found");
+      }
+      // hits = response.data['hits'];
+
+    } catch (e) {
+      print(e.toString());
+    }
   }
 }

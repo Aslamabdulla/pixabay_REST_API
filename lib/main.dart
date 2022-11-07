@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:pixabay_search_sample/controller/home_screen_controller.dart';
 import 'package:pixabay_search_sample/view/screens/home_screen/home_screen.dart';
 
 void main() {
@@ -11,7 +13,9 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
+      initialBinding:
+          BindingsBuilder(() => {Get.put(HomeController(), permanent: true)}),
       debugShowCheckedModeBanner: false,
       title: 'Pixabay',
       theme: ThemeData(

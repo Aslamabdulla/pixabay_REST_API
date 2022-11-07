@@ -1,6 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
+import 'package:pixabay_search_sample/controller/home_screen_controller.dart';
+import 'package:pixabay_search_sample/services/services.dart';
 import 'package:pixabay_search_sample/view/common/common.dart';
 
 // class ImageGridviewWidget extends StatelessWidget {
@@ -53,19 +56,34 @@ class ImageGridviewWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MasonryGridView.builder(
-      scrollDirection: Axis.vertical,
-      gridDelegate:
-          SliverSimpleGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-      crossAxisSpacing: 8,
-      mainAxisSpacing: 8,
-      itemCount: 15,
-      itemBuilder: (context, index) {
-        return ClipRRect(
-          borderRadius: BorderRadius.circular(20),
-          child: Image.network("https://source.unsplash.com/random?sig=$index"),
-        );
-      },
-    );
+    ImageDatabase database = ImageDatabase();
+    return GetBuilder<HomeController>(builder: (homeCtrl) {
+      return homeCtrl.isLoading.value == false
+          ? MasonryGridView.builder(
+              physics: const BouncingScrollPhysics(),
+              scrollDirection: Axis.vertical,
+              gridDelegate:
+                  const SliverSimpleGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2),
+              crossAxisSpacing: 8,
+              mainAxisSpacing: 8,
+              itemCount: homeCtrl.pixabayImages.length,
+              itemBuilder: (context, index) {
+                return ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  child: Image.network(
+                    homeCtrl.pixabayImages[index].previewURL,
+                    filterQuality: FilterQuality.low,
+                    fit: BoxFit.cover,
+                  ),
+                );
+              },
+            )
+          : const Center(
+              child: CupertinoActivityIndicator(
+                radius: 30,
+              ),
+            );
+    });
   }
 }
