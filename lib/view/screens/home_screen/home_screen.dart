@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+
 import 'package:get/get.dart';
-import 'package:pixabay_search_sample/view/common/common.dart';
+import 'package:pixabay_search_sample/services/services.dart';
+
 import 'package:pixabay_search_sample/view/common/constans.dart';
 
 import 'package:pixabay_search_sample/view/screens/home_screen/widgets/background_decoration.dart';
-import 'package:pixabay_search_sample/view/screens/home_screen/widgets/image_gridview_widget.dart';
+
 import 'package:pixabay_search_sample/view/screens/home_screen/widgets/search_field.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -15,6 +16,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     double height = Get.height;
     double width = Get.width;
+    ImageDatabase database = ImageDatabase();
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -27,19 +29,20 @@ class HomeScreen extends StatelessWidget {
       body: Stack(
         alignment: Alignment.topCenter,
         children: [
-          const BackgroundDecorationWidget(),
+          MediaQuery.of(context).orientation == Orientation.portrait
+              ? const BackgroundDecorationWidget()
+              : const SizedBox(),
           SafeArea(
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  ImageGridviewWidget(),
-                ],
-              ),
-            ),
-          )
+            child: Container(
+                margin: const EdgeInsets.symmetric(horizontal: 12),
+                child: Center(
+                  child: ElevatedButton(
+                      onPressed: () async {
+                        database.getImage("flower");
+                      },
+                      child: Text("hello")),
+                )),
+          ),
         ],
       ),
     );
