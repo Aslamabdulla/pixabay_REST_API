@@ -24,7 +24,7 @@ class SplashScreen extends StatelessWidget {
   splashTimer() async {
     await Future.delayed(
       const Duration(seconds: 4),
-    ).then((value) => Get.to(() => const HomeScreen(),
+    ).then((value) => Get.offAll(() => const HomeScreen(),
         transition: Transition.rightToLeft,
         duration: const Duration(milliseconds: 400)));
   }
