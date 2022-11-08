@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:get/get.dart';
-import 'package:pixabay_search_sample/services/services.dart';
-
 import 'package:pixabay_search_sample/view/common/constans.dart';
 
 import 'package:pixabay_search_sample/view/screens/home_screen/widgets/background_decoration.dart';
@@ -15,9 +12,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double height = Get.height;
-    double width = Get.width;
-
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(

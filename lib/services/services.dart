@@ -14,10 +14,10 @@ class ImageDatabase extends ApiCalls {
   List<ImagesPixabay> pixabayImages = [];
   Url url = Url();
   @override
-  Future<void> getImage(String value) async {
+  Future<void> getImage(String text) async {
     try {
       final Response response = await Dio().get(
-        '${url.kBaseUrl}${url.getImage}$value&image_type=photo&pretty=true&per_page=100',
+        '${url.kBaseUrl}${url.getImage}$text&image_type=photo&pretty=true&per_page=${url.perPage}',
       );
       if (response.statusCode == 200) {
         final List hits = response.data['hits'];
@@ -27,14 +27,11 @@ class ImageDatabase extends ApiCalls {
             return ImagesPixabay.fromMap(e);
           },
         ).toList();
-        homeController.isLoading.value = false;
         homeController.getImage(pixabayImages);
       } else if (response.statusCode == 404) {
-        homeController.isLoading.value = true;
         print("Error page not found");
+        homeController.isLoading.value = true;
       }
-      // hits = response.data['hits'];
-
     } catch (e) {
       print(e.toString());
     }

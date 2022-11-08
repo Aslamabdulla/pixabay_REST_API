@@ -14,11 +14,8 @@ class ImageGridviewWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var height = Get.height;
-    var width = Get.width;
-    ImageDatabase database = ImageDatabase();
     return GetBuilder<HomeController>(builder: (homeCtrl) {
-      return homeCtrl.isLoading.value == false
+      return homeCtrl.isLoading == false
           ? MasonryGridView.builder(
               physics: const BouncingScrollPhysics(),
               scrollDirection: Axis.vertical,
@@ -27,7 +24,7 @@ class ImageGridviewWidget extends StatelessWidget {
                       crossAxisCount: 2),
               crossAxisSpacing: 8,
               mainAxisSpacing: 8,
-              itemCount: homeCtrl.pixabayImages.length + 1,
+              itemCount: homeCtrl.pixabayImages.length,
               itemBuilder: (context, index) {
                 if (index < homeCtrl.pixabayImages.length) {
                   final imagesNetwork =

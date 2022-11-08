@@ -35,6 +35,7 @@ class SearchFieldWidget extends StatelessWidget {
                       borderRadius: borderRadiusSearchField,
                       borderSide: const BorderSide(color: kWhite))),
               onFieldSubmitted: (value) {
+                homeCtrl.isLoading.value = true;
                 homeCtrl.searchImage(value);
               },
             );

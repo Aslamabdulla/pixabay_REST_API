@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pixabay_search_sample/controller/home_screen_controller.dart';
 
 class ShowImageWidget extends StatelessWidget {
@@ -12,12 +13,17 @@ class ShowImageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var height = Get.height;
+    var width = Get.width;
     return Container(
       clipBehavior: Clip.hardEdge,
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
-      child: Image.network(
-        homeCtrl.pixabayImages[index].webformatURL,
-        fit: BoxFit.cover,
+      child: SingleChildScrollView(
+        child: Image.network(homeCtrl.pixabayImages[index].webformatURL,
+            fit: BoxFit.cover,
+            height: MediaQuery.of(context).orientation == Orientation.portrait
+                ? height / 2
+                : height / 2),
       ),
     );
   }
