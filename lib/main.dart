@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pixabay_search_sample/controller/home_screen_controller.dart';
-import 'package:pixabay_search_sample/view/screens/home_screen/home_screen.dart';
+
 import 'package:pixabay_search_sample/view/screens/splash_screen/splash_screen.dart';
 
 void main() {

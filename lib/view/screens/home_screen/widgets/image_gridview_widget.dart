@@ -44,7 +44,7 @@ class ImageGridviewWidget extends StatelessWidget {
                       borderRadius: BorderRadius.circular(20),
                       child: Image.network(
                         imagesNetwork,
-                        filterQuality: FilterQuality.low,
+                        filterQuality: FilterQuality.medium,
                         fit: BoxFit.cover,
                       ),
                     ),

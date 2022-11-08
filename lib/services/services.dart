@@ -29,11 +29,10 @@ class ImageDatabase extends ApiCalls {
         ).toList();
         homeController.getImage(pixabayImages);
       } else if (response.statusCode == 404) {
-        print("Error page not found");
         homeController.isLoading.value = true;
       }
     } catch (e) {
-      print(e.toString());
+      print(e);
     }
   }
 }

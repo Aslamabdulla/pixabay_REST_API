@@ -42,7 +42,6 @@ class HomeController extends GetxController {
   void paginateTask() {
     controller.addListener(() {
       if (controller.position.pixels == controller.position.maxScrollExtent) {
-        print("reached end");
         page++;
         database.getImage(searchController.value.text);
         update();
