@@ -11,6 +11,7 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     database.getImage("flower");
+    pageviewController.initialPage;
     super.onInit();
   }
 
@@ -47,5 +48,12 @@ class HomeController extends GetxController {
         update();
       }
     });
+  }
+
+  final pageviewController = PageController(initialPage: 0);
+  @override
+  void dispose() {
+    pageviewController.dispose();
+    super.dispose();
   }
 }

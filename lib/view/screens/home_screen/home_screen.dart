@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import 'package:pixabay_search_sample/view/common/constans.dart';
 
@@ -6,6 +7,7 @@ import 'package:pixabay_search_sample/view/screens/home_screen/widgets/backgroun
 import 'package:pixabay_search_sample/view/screens/home_screen/widgets/image_gridview_widget.dart';
 
 import 'package:pixabay_search_sample/view/screens/home_screen/widgets/search_field.dart';
+import 'package:pixabay_search_sample/view/screens/page_view_image/page_view_image.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -20,6 +22,17 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: kAppBarColor,
         elevation: 0,
         title: const SearchFieldWidget(),
+        actions: [
+          IconButton(
+              onPressed: () {
+                Get.to(() => const PageViewImageScreen());
+              },
+              icon: const Icon(
+                Icons.perm_media_outlined,
+                color: kRedAccent,
+                size: 30,
+              ))
+        ],
       ),
       body: Stack(
         alignment: Alignment.topCenter,
