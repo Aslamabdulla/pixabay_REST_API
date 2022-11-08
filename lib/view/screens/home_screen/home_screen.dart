@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pixabay_search_sample/controller/home_screen_controller.dart';
 
 import 'package:pixabay_search_sample/view/common/constans.dart';
 
@@ -41,9 +42,19 @@ class HomeScreen extends StatelessWidget {
               ? const BackgroundDecorationWidget()
               : const SizedBox(),
           SafeArea(
-            child: Container(
-                margin: const EdgeInsets.symmetric(horizontal: 12),
-                child: const ImageGridviewWidget()),
+            child: GetBuilder<HomeController>(
+                init: HomeController(),
+                builder: (controller) {
+                  return Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 12),
+                      child: controller.pixabayImages.isEmpty
+                          ? const Center(
+                              child: Text("No Item Found"),
+                            )
+                          : ImageGridviewWidget(
+                              homeController: controller,
+                            ));
+                }),
           ),
         ],
       ),

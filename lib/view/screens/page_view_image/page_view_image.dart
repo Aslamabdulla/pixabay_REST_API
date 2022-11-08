@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pixabay_search_sample/controller/home_screen_controller.dart';
 import 'package:pixabay_search_sample/view/common/common.dart';
+import 'package:pixabay_search_sample/view/common/constans.dart';
 import 'package:pixabay_search_sample/view/screens/page_view_image/widgets/bottom_heading.dart';
 import 'package:pixabay_search_sample/view/screens/page_view_image/widgets/side_buttons_widget.dart';
 
@@ -17,8 +18,14 @@ class PageViewImageScreen extends StatelessWidget {
       body: GetBuilder<HomeController>(
           init: HomeController(),
           builder: (controller) {
-            return Container(
-                child: PageView.builder(
+            return controller.pixabayImages.isEmpty
+                ? const Center(
+                    child: Text(
+                      "NO ITEM THERE",
+                      style: TextStyle(color: kBlack),
+                    ),
+                  )
+                : PageView.builder(
                     physics: const BouncingScrollPhysics(),
                     scrollDirection: Axis.vertical,
                     itemCount: controller.pixabayImages.length,
@@ -55,7 +62,7 @@ class PageViewImageScreen extends StatelessWidget {
                               SideButtonsWidget(height: height, width: width)
                             ],
                           ),
-                        )));
+                        ));
           }),
     );
   }

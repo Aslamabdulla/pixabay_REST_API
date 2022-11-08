@@ -1,17 +1,18 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/cupertino.dart';
-
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 
 import 'package:pixabay_search_sample/controller/home_screen_controller.dart';
 import 'package:pixabay_search_sample/services/services.dart';
-
 import 'package:pixabay_search_sample/view/screens/home_screen/widgets/image_preview_widget.dart';
 
 class ImageGridviewWidget extends StatelessWidget {
-  const ImageGridviewWidget({super.key});
-
+  const ImageGridviewWidget({
+    Key? key,
+    required this.homeController,
+  }) : super(key: key);
+  final HomeController homeController;
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(builder: (homeCtrl) {
